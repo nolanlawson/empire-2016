@@ -49,7 +49,7 @@
 
             <h4>@nolanlawson</h4>
           <div class="footer">
-            <div class="text-muted">Speaker notes are in the dev console!</div>
+           <!-- <div class="text-muted">Speaker notes are in the dev console!</div> -->
           </div>
           <aside class="notes">
             Hi everybody.
@@ -329,23 +329,12 @@ self.onmessage = function (e) {
           </aside>
         </section>
 
-
-        <!-- TLDR
-
         <section>
-          <img src="img/caniuse_webworkers.png" alt="caniuse.com page for web workers"/>
-          <aside class="notes">
-            Web worker support is very good.
-          </aside>
-        </section>
-        -->
-
-        <section>
-         <h3>Web Workers can do...</h3>
+         <h3>What can Web Workers do?</h3>
           <ul>
             <li class="fragment">Ajax</li>
             <li class="fragment">IndexedDB</li>
-            <li class="fragment">Anything JS can do</li>
+            <li class="fragment">Almost anything JS can do</li>
             <li class="fragment">...but not DOM</li>
             <li class="fragment">Virtual DOM!</li>
           </ul>
@@ -401,6 +390,111 @@ self.onmessage = function (e) {
         </section>
 
         <section>
+          <h2>Challenges</h2>
+        </section>
+
+        <section>
+          <h3>Challenge 1: browser support</h3>
+        </section>
+
+        <section>
+          <img src="img/caniuse_webworkers.png" alt="caniuse.com page for web workers"/>
+          <aside class="notes">
+            Web worker support is very good.
+          </aside>
+        </section>
+
+        <section>
+          <img src="img/pseudoworker.png" alt="pseudo-worker"/>
+          <aside class="notes">
+            Polyfills exist.
+          </aside>
+        </section>
+
+        <section>
+          <h3>Web Workers vs Service Workers</h3>
+          <img src="img/worker-types.png" alt="Types of workers"/>
+          <div>
+            <small class="text-muted">Source: <a href="https://docs.google.com/document/d/1i3IA3TG00rpQ7MKlpNFYUF6EfLcV01_Cv3IYG_DjF7M/edit#">Blink report on workers</a></small>
+          </div>
+          <aside class="notes">
+            Types of workers.
+          </aside>
+        </section>
+
+        <section>
+          <h3>Challenge 2: WW message overhead</h3>
+          <img src="img/tweet_cramforce.png"/>
+        </section>
+
+        <section>
+          <h3>High-performance Web Worker Messages</h3>
+          <img src="img/stringify-chrome.png" alt="stringification in chrome"/>
+          <div>
+            <small class="text-muted">Source: <a href="http://nolanlawson.com/2016/02/29/high-performance-web-worker-messages/">High-performance Web Worker messages</a></small>
+          </div>
+          <aside class="notes">
+            Stringification in Chrome is faster.
+          </aside>
+        </section>
+
+        <section>
+          <img src="img/promise-worker.png" alt="promise-worker"/>
+          <aside class="notes">
+            Promise-worker does this.
+          </aside>
+        </section>
+
+        <section>
+          <h3>Challenge 3: event.preventDefault()</h3>
+          <img src="img/tweet_impossible.png"/>
+        </section>
+
+        <section>
+          <blockquote style="text-align:left;">At Google we've been facing this issue for years actually: We typically late load all parts of the apps, and that includes implementations for click handlers. So we might not be able to synchronously handle a click all the time – which brings us to exactly the same problem as having the app running in a different thread.</blockquote>
+          <p style="text-align:right;">– Malte Ubl, AMP project</p>
+        </section>
+
+        <section>
+          <h3>Challenge 4: supported APIs in workers</h3>
+        </section>
+
+        <section>
+          <img src="img/worker_classes.png"/>
+        </section>
+
+        <section>
+          <img src="img/webgl_worker.png"/>
+        </section>
+
+        <section>
+          <img src="img/canvas_worker.png"/>
+        </section>
+
+        <section>
+          <h2>This is coming to frameworks</h2>
+        </section>
+
+        <section>
+          <h3>Angular 2</h3>
+          <img src="img/tweet_briant.png"/>
+        </section>
+
+        <section>
+          <h3>React</h3>
+          <img src="img/tweet_floyd.png"/>
+        </section>
+
+        <section>
+          <h3>Ember</h3>
+          <img src="img/tweet_tom.png"/>
+        </section>
+
+        <section>
+          <img src="img/tweet_jaffa.png"/>
+        </section>
+
+        <section>
           <h2 class="random-color">Thank you!</h2>
           <img class="no-border pixel-image" style="display:block" width="100" src="img/kirby_expedition.gif"/>
           <h4 style="margin-top: 10px !important">nolanlawson.github.io/brooklynjs-2016-02</h4>
@@ -412,6 +506,18 @@ self.onmessage = function (e) {
             <li><a href="http://www.pocketjavascript.com/blog/2015/11/23/introducing-pokedex-org">Introducing Pokedex.org: a progressive webapp for Pokémon fans</a></li>
             <li><a href="http://blog.nparashuram.com/2015/12/react-web-worker-renderer.html">React Custom Renderer using Web Workers</a></li>
             <li><a href="http://blog.nparashuram.com/2016/02/using-webworkers-to-make-react-faster.html">Using Webworkers to make React faster </a></li>
+            <li><a href="https://docs.google.com/document/d/1i3IA3TG00rpQ7MKlpNFYUF6EfLcV01_Cv3IYG_DjF7M/edit#">Blink Workers</a></li>
+            <li><a href="http://nolanlawson.com/2016/02/29/high-performance-web-worker-messages/">High-performance Web Worker messages</a></li>
+            <li><a href="http://blog.runspired.com/2015/06/05/using-webworkers-to-bring-native-app-best-practices-to-javascript-spas/">
+              Using WebWorkers to bring native app best practices to javascript SPAs
+            </a></li>
+            <li><a href="https://plus.google.com/+MalteUbl/posts/NLyinvqwZHo">Handling event.preventDefault() in a WW</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Functions_and_classes_available_to_workers">
+              Functions and classes available to Web Workers
+            </a></li>
+            <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=801176">
+              Bug 801176 - Support canvas 2D API from workers
+            </a></li>
           </ul>
           <aside class="notes">
             This think this stuff is going to start popping up in frameworks. It's already going to appear in Angular 2, which is
