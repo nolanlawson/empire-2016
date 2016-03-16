@@ -280,6 +280,11 @@ self.onmessage = function (e) {
         </section>
 
         <section>
+          <h3>500KB JavaScript app</h3>
+          <img class="no-border pixel-image" height="750" style="transform: translateY(-80px)" src="img/kirby_busy.gif"/>
+        </section>
+
+        <section>
           <img class="pixel-image no-border" width="600" src="img/kirby_three_dance.gif"/>
           <aside class="notes">
             So what'd be nice, is if the UI thread could spawn some friends to help him out. Then those friends
@@ -428,7 +433,7 @@ self.onmessage = function (e) {
         </section>
 
         <section>
-          <h3>High-performance Web Worker Messages</h3>
+          <h3>Solution: JSON.stringify()</h3>
           <img src="img/stringify-chrome.png" alt="stringification in chrome"/>
           <div>
             <small class="text-muted">Source: <a href="http://nolanlawson.com/2016/02/29/high-performance-web-worker-messages/">High-performance Web Worker messages</a></small>
@@ -449,6 +454,34 @@ self.onmessage = function (e) {
           <h3>Challenge 3: event.preventDefault()</h3>
           <img src="img/tweet_impossible.png"/>
         </section>
+
+        <section>
+          <div style="display:flex;flex-direction:row;">
+            <div style="flex-grow: 1; flex-shrink: 1">
+          <pre><code class="javascript">// works!
+
+function click(e) {
+  if (shouldPreventDefault()) {
+    e.preventDefault();
+  }
+}
+el.addEventListener('click', click);</code></pre>
+            </div>
+
+            <div style="flex-grow: 1; flex-shrink: 1;">
+          <pre><code class="javascript">// doesn't work :(
+
+function click(e) {
+  checkAsync().then(function (bool) {
+    if (bool) {
+      e.preventDefault();
+    }
+  });
+}
+el.addEventListener('click', click);</code></pre>
+</div>
+</div>
+</section>
 
         <section>
           <blockquote style="text-align:left;">At Google we've been facing this issue for years actually: We typically late load all parts of the apps, and that includes implementations for click handlers. So we might not be able to synchronously handle a click all the time – which brings us to exactly the same problem as having the app running in a different thread.</blockquote>
@@ -523,6 +556,10 @@ self.onmessage = function (e) {
             </a></li>
             <li><a href="https://medium.com/@cramforce/2016-will-be-the-year-of-concurrency-on-the-web-c39b1e99b30f">
               2016 will be the year of concurrency on the web
+            </a></li>
+            <li><a href="https://www.youtube.com/watch?v=Kz_zKXiNGSE">Using Web Workers for more responsive apps (video)</a></li>
+            <li><a href="https://www.oreilly.com/ideas/angular-2-and-the-future-of-html5-apps">
+              Angular 2 and the future of HTML5 apps
             </a></li>
           </ul>
           <aside class="notes">
