@@ -48,8 +48,8 @@
           <div class="pixel-image" style="width:300px;height:200px;background-image: url(img/worker_kirby.png);"></div>
 
             <h4>@nolanlawson</h4>
-          <div class="footer">
-           <div class="text-muted">(Partial) speaker notes are in the dev console</div>
+          <div class="footer text-muted">
+           Kirby is &copy; Nintendo and HAL Laboratory
           </div>
           <aside class="notes">
             Hi everybody.
@@ -91,7 +91,6 @@
 
         <section>
 
-          <img class="no-border" style="display:inline-block" height="150" src="img/squarespace.jpg" alt="squarespace"/>
           <img class="no-border" style="display:inline-block" height="150" src="img/pouchdb.png" alt="pouchdb"/>
           <aside class="notes">
             I work at Squarespace, and I help maintain PouchDB.
@@ -110,7 +109,7 @@
 
         <section>
           <div>
-            <video height=680 src="vid/kirby_1.webm" loop data-autoplay></video>
+            <video height=680 src="vid/kirby_1.webm" ></video>
           </div>
           <aside class="notes">
             This problem is pretty easy to reproduce. All you need to do is
@@ -127,7 +126,7 @@
 
         <section>
           <div>
-            <video style="max-width: 100%;" height=680 src="vid/kirby_2.webm" loop data-autoplay></video>
+            <video style="max-width: 100%;" height=680 src="vid/kirby_2.webm" ></video>
           </div>
           <aside class="notes">
             But it doesn't just affect animated GIFs - it affects almost everything
@@ -155,7 +154,7 @@
 
         <section>
           <div>
-            <video style="max-width: 100%;" height=680 src="vid/kirby_3.webm" loop data-autoplay></video>
+            <video style="max-width: 100%;" height=680 src="vid/kirby_3.webm" ></video>
           </div>
           <aside class="notes">
             Now, you might not have ever written *such* a long-running JavaScript operation
@@ -182,6 +181,11 @@
             every second, they flash an image 60 times, which gives the illusion of movement. It's just
             like this flipbook.
           </aside>
+
+          <div class="footer text-muted">
+            Source: Eadweard Muybridge (public domain)
+          </div>
+
         </section>
 
         <section>
@@ -196,6 +200,9 @@
         <section>
           <h3>Factor in browser overhead...</h3>
           <img class="no-border"  src="img/paul_lewis.png" alt="Paul Lewis, 10ms"/>
+          <div class="footer text-muted">
+            Source: https://vimeo.com/125121010
+          </div>
           <aside class="notes">
             If you factor in browser overhead, according to Paul Lewis on the Chrome team, this is actually
             even smaller. 10ms for all your JavaScript to execute! That's tiny! that's punishingly small!
@@ -331,7 +338,7 @@ self.onmessage = function (e) {
 
         <section>
           <div>
-            <video height=680 src="vid/pokedex_loop.webm" loop data-autoplay></video>
+            <video height=680 src="vid/pokedex_loop.webm" ></video>
           </div>
           <aside class="notes">
             So I experimented with this, and I demonstrated that it's possible. I wrote an app
@@ -352,7 +359,7 @@ self.onmessage = function (e) {
         <section>
           <h3>Pokedex.org on a 2011 Galaxy Nexus</h3>
           <div style="transform: translateY(-50px)">
-            <video height=680 src="vid/pokedex.webm" loop data-autoplay></video>
+            <video height=680 src="vid/pokedex.webm" ></video>
           </div>
           <aside class="notes">
             This works surprisingly well. Here's my Pokedex.org app running on a 2011-era Galaxy Nexus phone.
@@ -364,7 +371,7 @@ self.onmessage = function (e) {
         <section>
           <h3>React with Web Workers</h3>
           <div style="transform: translateY(-50px)">
-            <video height=680 src="vid/react_worker.webm" loop data-autoplay></video>
+            <video height=680 src="vid/react_worker.webm" ></video>
           </div>
           <aside class="notes">
             And if you still don't believe me, there was a blog post recently where Parashuram demonstrates that you can run
@@ -658,6 +665,36 @@ el.addEventListener('click', click);</code></pre>
 				]
 			});
 
+      function playVideo() {
+        var videos = Array.from(
+          document.querySelectorAll('section.present video'));
+        videos.forEach(function (vid) {
+          vid.loop = true;
+          vid.currentTime = 0;
+          vid.play();
+        });
+
+        var otherVideos = Array.from(document.querySelectorAll('section.past video')).concat(
+          Array.from(document.querySelectorAll('section.future video')));
+        otherVideos.forEach(function (vid) {
+          vid.pause();
+        });
+      }
+
+      function playGif() {
+        var gifs = Array.from(
+          document.querySelectorAll('section.present img[src*=gif]'));
+        gifs.forEach(function (gif) {
+          var newSrc = gif.src.replace(/(\?nonce=.*?)?$/, '?nonce=' +
+            Math.round(100000000 * Math.random()));
+          // reset the gif
+          gif.src = '';
+          requestAnimationFrame(function () {
+            gif.src = newSrc;
+          });
+        });
+      }
+
       Reveal.addEventListener( 'slidechanged', function( event ) {
         // event.previousSlide, event.currentSlide, event.indexh, event.indexv
         var notes = event.currentSlide.querySelector(".notes");
@@ -665,8 +702,15 @@ el.addEventListener('click', click);</code></pre>
           console.info(notes.innerHTML.replace(/\n\s+/g,'\n'));
         }
 
-        clearInterval(randomizedTextTimeout);
-        randomizeText(event.currentSlide);
+        requestAnimationFrame(function () {
+          clearInterval(randomizedTextTimeout);
+          randomizeText(event.currentSlide);
+          requestAnimationFrame(function () {
+            playVideo();
+            playGif();
+          });
+
+        });
       } );
 
       Reveal.addEventListener('fragmentshown', function (e) {
@@ -688,6 +732,9 @@ el.addEventListener('click', click);</code></pre>
       if (notes) {
         console.info(notes.innerHTML.replace(/\n\s+/g, '\n'));
       }
+
+      playVideo();
+      playGif();
 
       randomizeText(document.querySelector('section.present'));
 
