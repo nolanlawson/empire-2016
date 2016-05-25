@@ -380,7 +380,7 @@ self.onmessage = function (e) {
             This is great that the patch tends to be small, because the *only* cost you pay with a web worker on the main
             thread is the cost of serializing and de-serializing the messages sent back and forth with the worker.
           </aside>
-          <div class="footer text-muted">
+          <div class="footer text-muted"  style="transform: translateY(-5px);">
             Source: http://www.pocketjavascript.com/blog/2015/11/23/introducing-pokedex-org
           </div>
         </section>
@@ -407,7 +407,7 @@ self.onmessage = function (e) {
             React's virtual DOM inside of a web worker, and he actually demonstrated that this resulted in a better framerate than
             when you don't use a worker.
           </aside>
-          <div class="footer text-muted">
+          <div class="footer text-muted" style="transform: translateY(-100px);">
             Source: http://blog.nparashuram.com/2015/12/react-web-worker-renderer.html
           </div>
         </section>
@@ -417,7 +417,7 @@ self.onmessage = function (e) {
           <div style="transform: translateY(-70px)">
             <video height=680 src="vid/angular_before.webm" ></video>
           </div>
-          <div class="footer text-muted">
+          <div class="footer text-muted" style="transform: translateY(-100px);">
             Source: https://www.youtube.com/watch?v=Kz_zKXiNGSE
           </div>
         </section>
@@ -427,7 +427,7 @@ self.onmessage = function (e) {
           <div style="transform: translateY(-70px)">
             <video height=680 src="vid/angular_after.webm" ></video>
           </div>
-          <div class="footer text-muted">
+          <div class="footer text-muted" style="transform: translateY(-100px);">
             Source: https://www.youtube.com/watch?v=Kz_zKXiNGSE
           </div>
         </section>
@@ -513,7 +513,7 @@ el.addEventListener('click', click);</code></pre>
 
         <section>
           <blockquote style="text-align:left;">At Google we've been facing this issue for years actually: We typically late load all parts of the apps, and that includes implementations for click handlers. So we might not be able to synchronously handle a click all the time – which brings us to exactly the same problem as having the app running in a different thread.</blockquote>
-          <p style="text-align:right;">– Malte Ubl, AMP project</p>
+          <p style="text-align:right;">– Malte Ubl, AMP project lead</p>
           <div class="footer text-muted">
             Source: https://plus.google.com/+MalteUbl/posts/NLyinvqwZHo
           </div>
@@ -603,8 +603,9 @@ el.addEventListener('click', click);</code></pre>
         <section>
           <h2 class="random-color">Thank you!</h2>
           <img class="no-border pixel-image" style="display:block" width="100" src="img/kirby_expedition.gif"/>
-          <h4 style="margin-top: 10px !important">nolanlawson.github.io/empire-2016</h4>
-          <ul style="font-size: 18px !important;line-height:20px !important;">
+          <h4>@nolanlawson</h4>
+          <h4 style="margin-top: 10px !important"><a href="http://nolanlawson.github.io/empire-2016">nolanlawson.github.io/empire-2016</a></h4>
+          <ul style="font-size: 14px !important;line-height:16px !important;">
             <li><a href="demo1.html">First demo</a></li>
             <li><a href="demo2.html">Second demo</a></li>
             <li><a href="https://vimeo.com/125121010">Paul Lewis on Making a Silky Smooth Web</a></li>
