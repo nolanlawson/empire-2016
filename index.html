@@ -211,9 +211,27 @@
           </aside>
         </section>
 
-        <!-- TLDR
         <section>
-          <img src="img/jeff_atwood.png" alt="Jeff Atwood, state of JS performance is poor"/>
+          <h3>Asynchronicity will save us!</h3>
+          <div><em>(except not)</em></div>
+        </section>
+
+        <section>
+          <h4>Ajax (async!) blocks the DOM</h4>
+          <div>
+            <video style="max-width: 100%;transform:translateY(-60px);" height=680 src="vid/kirby_blocked_by_ajax.webm" ></video>
+          </div>
+        </section>
+
+        <section>
+          <h4>IndexedDB (async!) blocks the DOM</h4>
+          <div>
+            <video style="max-width: 100%;transform:translateY(-20px);" height=680 src="vid/kirby_blocked_by_idb.webm" ></video>
+          </div>
+        </section>
+
+        <section>
+          <img class="no-border" src="img/jeff_atwood.png" alt="Jeff Atwood, state of JS performance is poor"/>
           <aside class="notes">It led Jeff Atwood
             to write this post about how Android phones just aren't fast enough to run Discourse, which is
             an Ember app. Newer iPhones are barely fast enough, but Android phones just aren't there.
@@ -225,7 +243,14 @@
           </aside>
         </section>
 
-        -->
+        <section>
+          <div style="position:relative;left: 0; top: 0;">
+            <img class="no-border" style="z-index: 1;" src="img/phones.png"/>
+            <div class="fragment" style="text-align:center;z-index: 2;position:absolute;top:0;left:0;right:0;bottom:0;">
+              <img class="no-border" style="" src="img/phones-overlay.png"/>
+            </div>
+          </div>
+        </section>
 
         <section>
           <div style="display:flex;flex-direction:row;">
@@ -323,9 +348,10 @@ self.onmessage = function (e) {
         <section>
          <h3>What can Web Workers do?</h3>
           <ul>
+            <li class="fragment">JSON</li>
+            <li class="fragment">Data processing</li>
             <li class="fragment">Ajax</li>
             <li class="fragment">IndexedDB</li>
-            <li class="fragment">Almost anything JS can do</li>
             <li class="fragment">...but not DOM</li>
             <li class="fragment">Virtual DOM!</li>
           </ul>
@@ -354,6 +380,9 @@ self.onmessage = function (e) {
             This is great that the patch tends to be small, because the *only* cost you pay with a web worker on the main
             thread is the cost of serializing and de-serializing the messages sent back and forth with the worker.
           </aside>
+          <div class="footer text-muted">
+            Source: http://www.pocketjavascript.com/blog/2015/11/23/introducing-pokedex-org
+          </div>
         </section>
 
         <section>
@@ -378,6 +407,29 @@ self.onmessage = function (e) {
             React's virtual DOM inside of a web worker, and he actually demonstrated that this resulted in a better framerate than
             when you don't use a worker.
           </aside>
+          <div class="footer text-muted">
+            Source: http://blog.nparashuram.com/2015/12/react-web-worker-renderer.html
+          </div>
+        </section>
+
+        <section>
+          <h3>Angular 2 - without Web Workers</h3>
+          <div style="transform: translateY(-70px)">
+            <video height=680 src="vid/angular_before.webm" ></video>
+          </div>
+          <div class="footer text-muted">
+            Source: https://www.youtube.com/watch?v=Kz_zKXiNGSE
+          </div>
+        </section>
+
+        <section>
+          <h3>Angular 2 - with Web Workers</h3>
+          <div style="transform: translateY(-70px)">
+            <video height=680 src="vid/angular_after.webm" ></video>
+          </div>
+          <div class="footer text-muted">
+            Source: https://www.youtube.com/watch?v=Kz_zKXiNGSE
+          </div>
         </section>
 
         <section>
@@ -385,7 +437,8 @@ self.onmessage = function (e) {
         </section>
 
         <section>
-          <h3>Challenge 1: browser support</h3>
+          <h2>Can I use...?</h2>
+          <h1>YES.</h1>
         </section>
 
         <section>
@@ -403,26 +456,15 @@ self.onmessage = function (e) {
         </section>
 
         <section>
-          <h3>Web Workers vs Service Workers</h3>
-          <img src="img/worker-types.png" alt="Types of workers"/>
-          <div>
-            <small class="text-muted">Source: <a href="https://docs.google.com/document/d/1i3IA3TG00rpQ7MKlpNFYUF6EfLcV01_Cv3IYG_DjF7M/edit#">Blink report on workers</a></small>
-          </div>
-          <aside class="notes">
-            Types of workers.
-          </aside>
-        </section>
-
-        <section>
-          <h3>Challenge 2: WW message overhead</h3>
+          <h3>Message overhead?</h3>
           <img src="img/tweet_cramforce.png"/>
         </section>
 
         <section>
           <h3>Solution: JSON.stringify()</h3>
           <img src="img/stringify-chrome.png" alt="stringification in chrome"/>
-          <div>
-            <small class="text-muted">Source: <a href="http://nolanlawson.com/2016/02/29/high-performance-web-worker-messages/">High-performance Web Worker messages</a></small>
+          <div class="footer text-muted">
+            Source: <a href="http://nolanlawson.com/2016/02/29/high-performance-web-worker-messages/">High-performance Web Worker messages</a>
           </div>
           <aside class="notes">
             Stringification in Chrome is faster.
@@ -472,6 +514,9 @@ el.addEventListener('click', click);</code></pre>
         <section>
           <blockquote style="text-align:left;">At Google we've been facing this issue for years actually: We typically late load all parts of the apps, and that includes implementations for click handlers. So we might not be able to synchronously handle a click all the time – which brings us to exactly the same problem as having the app running in a different thread.</blockquote>
           <p style="text-align:right;">– Malte Ubl, AMP project</p>
+          <div class="footer text-muted">
+            Source: https://plus.google.com/+MalteUbl/posts/NLyinvqwZHo
+          </div>
         </section>
 
         <section>
@@ -484,6 +529,9 @@ el.addEventListener('click', click);</code></pre>
 
         <section>
           <img src="img/worker_classes.png"/>
+          <div class="footer text-muted">
+            Source: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Functions_and_classes_available_to_workers">MDN - Functions and classes available to workers</a>
+          </div>
         </section>
 
         <section>
@@ -513,10 +561,6 @@ el.addEventListener('click', click);</code></pre>
           <img src="img/skyrocket.png"/>
         </section>
 
-        <section>
-          <h3>Ember</h3>
-          <img src="img/tweet_tom.png"/>
-        </section>
 
         <section>
           <img src="img/tweet_jaffa.png"/>
