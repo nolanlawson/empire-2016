@@ -212,25 +212,6 @@
         </section>
 
         <section>
-          <h3>Asynchronicity will save us!</h3>
-          <div><em>(except not)</em></div>
-        </section>
-
-        <section>
-          <h4>Ajax (async!) blocks the DOM</h4>
-          <div>
-            <video style="max-width: 100%;transform:translateY(-60px);" height=680 src="vid/kirby_blocked_by_ajax.webm" ></video>
-          </div>
-        </section>
-
-        <section>
-          <h4>IndexedDB (async!) blocks the DOM</h4>
-          <div>
-            <video style="max-width: 100%;transform:translateY(-25px);" height=680 src="vid/kirby_blocked_by_idb.webm" ></video>
-          </div>
-        </section>
-
-        <section>
           <img class="no-border" src="img/jeff_atwood.png" alt="Jeff Atwood, state of JS performance is poor"/>
           <aside class="notes">It led Jeff Atwood
             to write this post about how Android phones just aren't fast enough to run Discourse, which is
@@ -352,20 +333,58 @@ self.onmessage = function (e) {
         </section>
 
         <section>
-         <h3>What can Web Workers do?</h3>
+          <h3>What can Web Workers do?</h3>
           <ul>
+            <li class="fragment">Synchronous JavaScript</li>
             <li class="fragment">JSON</li>
-            <li class="fragment">Data processing</li>
-            <li class="fragment">Ajax</li>
-            <li class="fragment">IndexedDB</li>
-            <li class="fragment">...but not DOM</li>
-            <li class="fragment">Virtual DOM!</li>
+            <li class="fragment"><code>btoa()</code>, <code>atob()</code></li>
+            <li class="fragment">FileReader, Blob, ArrayBuffer</li>
           </ul>
           <aside class="notes">
             So what can you do inside of a web worker? Well, you have ajax and IndexedDB, and like I said,
             those actually *can* block the DOM, so it's worthwhile to put them in a web worker. You can also
             do any normal JS operations, except for the DOM. But hey, you can do Virtual DOM, right?
           </aside>
+        </section>
+
+        <section>
+          <h3>What can Web Workers do? <em>(cont.)</em></h3>
+          <ul>
+            <li class="fragment">AJAX/fetch</li>
+          </ul>
+        </section>
+
+        <section>
+          <h4>Ajax (async!) blocks the DOM</h4>
+          <div>
+            <video style="max-width: 100%;transform:translateY(-60px);" height=680 src="vid/kirby_blocked_by_ajax.webm" ></video>
+          </div>
+        </section>
+
+        <section>
+          <h3>What can Web Workers do? <em>(cont.)</em></h3>
+          <ul>
+            <li class="fragment">IndexedDB</li>
+          </ul>
+        </section>
+
+        <section>
+          <h4>IndexedDB (async!) blocks the DOM</h4>
+          <div>
+            <video style="max-width: 100%;transform:translateY(-25px);" height=680 src="vid/kirby_blocked_by_idb.webm" ></video>
+          </div>
+        </section>
+
+        <section>
+          <h4>What can Web Workers do?</h4>
+          <ul>
+            <li class="fragment">JavaScript</li>
+            <li class="fragment">JSON</li>
+            <li class="fragment">AJAX</li>
+            <li class="fragment">IndexedDB</li>
+            <li class="fragment">...but not DOM 😢</li>
+            <li class="fragment">Virtual DOM!</li>
+          </ul>
         </section>
 
         <section>
@@ -392,6 +411,18 @@ self.onmessage = function (e) {
         </section>
 
         <section>
+          <h3>Pokedex.org on a 2011 Galaxy Nexus</h3>
+          <div style="transform: translateY(-50px)">
+            <video height=680 src="vid/pokedex.webm" ></video>
+          </div>
+          <aside class="notes">
+            This works surprisingly well. Here's my Pokedex.org app running on a 2011-era Galaxy Nexus phone.
+            It runs at 60fps, and is nearly indistinguishable from a native app. On newer Android phones, it
+            *is* indistinguishable from a native app.
+          </aside>
+        </section>
+
+        <section>
           <h3>Without workers</h3>
           <img class="no-border" src="img/withoutworker.png"/>
         </section>
@@ -408,18 +439,6 @@ self.onmessage = function (e) {
             <tr><td><strong>worker.js</strong></td><td>90.9kB</td></tr>
             <tr><td><strong>serviceWorker.js</strong></td><td>15.8kB</td></tr>
           </table>
-        </section>
-
-        <section>
-          <h3>Pokedex.org on a 2011 Galaxy Nexus</h3>
-          <div style="transform: translateY(-50px)">
-            <video height=680 src="vid/pokedex.webm" ></video>
-          </div>
-          <aside class="notes">
-            This works surprisingly well. Here's my Pokedex.org app running on a 2011-era Galaxy Nexus phone.
-            It runs at 60fps, and is nearly indistinguishable from a native app. On newer Android phones, it
-            *is* indistinguishable from a native app.
-          </aside>
         </section>
 
         <section>
@@ -597,11 +616,14 @@ el.addEventListener('click', click);</code></pre>
           </div>
         </section>
 
-<!-- TLDR
+        <!-- TLDR
+        <section>
+          <img src="img/nolan_tweet.png"/>
+        </section>
+-->
         <section>
           <img src="img/tweet_jaffa.png"/>
         </section>
--->
         <section>
           <h3>Four cores</h3>
           <div class="quad-outer" style="transform: translateY(-30px)">
