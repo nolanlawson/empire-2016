@@ -871,7 +871,8 @@ el.addEventListener('click', click);</code></pre>
 
       randomizeText(document.querySelector('section.present'));
 
-      if (!UA.isChrome() && !UA.isFirefox() && !UA.isAndroid() && !UA.isOpera()) {
+      var isEdge = navigator.userAgent.indexOf('Edge') !== -1;
+      if (isEdge || (!UA.isChrome() && !UA.isFirefox() && !UA.isAndroid() && !UA.isOpera())) {
         window.alert(
           'Heads up! This presentation looks best in ' +
           'Firefox/Chrome due to WEBM video and image-rendering:pixelated. Sorry!');
